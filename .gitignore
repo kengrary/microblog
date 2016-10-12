@@ -3,4 +3,4 @@ flask/
 tmp/
 microblog.sublime*
 .idea/
-test.db
+*.db
