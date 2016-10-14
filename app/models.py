@@ -1,6 +1,8 @@
 from app import app,db
 from hashlib import md5
 import sys
+import re
+
 if sys.version_info >= (3, 0):
     enable_search = False
 else:
@@ -37,6 +39,10 @@ class User(db.Model):
                 break
             version += 1
         return new_nickname
+
+    @staticmethod
+    def make_valid_nickname(nickname):
+        return re.sub('[^a-zA-Z0-9_\.]', '', nickname)
 
     def avatar(self, size):
         return 'http://www.gravatar.com/avatar/' + \

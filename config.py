@@ -1,3 +1,4 @@
+# _*_ coding: utf-8 _*_
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -15,7 +16,21 @@ OPENID_PROVIDERS = [
     {'name': 'AOL', 'url': 'http://openid.aol.com/<username>'},
     {'name': 'Flickr', 'url': 'http://www.flickr.com/<username>'}
 ]
+MAIL_SERVER = 'smtp.126.com'
+MAIL_PORT = 25
+MAIL_USE_TLS = False
+MAIL_USE_SSL = False
+MAIL_USERNAME = 'kengrary@126.com'
+MAIL_PASSWORD = '126mail@000181'
+
+ADMINS = ['kengrary@126.com']
+
 POSTS_PER_PAGE = 3
 
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 MAX_SEARCH_RESULTS = 50
+
+LANGUAGES = {
+    'en': 'English',
+    'zh': 'Chinese'
+}
