@@ -19,7 +19,7 @@ def index(page = 1):
         post = Post(body=form.post.data, timestamp=datetime.utcnow(), author=g.user)
         db.session.add(post)
         db.session.commit()
-        flash('Your post is now live!')
+        flash(gettext('Your post is now live!'))
         return redirect(url_for('index'))
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
     return render_template('index.html',
@@ -55,7 +55,7 @@ def logout():
 def user(nickname, page=1):
     user = User.query.filter_by(nickname=nickname).first()
     if user is None:
-        flash('User ' + nickname + ' not found.')
+        flash(gettext('User ' + nickname + ' not found.'))
         return redirect(url_for('index'))
     posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
     return render_template('user.html',
@@ -73,7 +73,7 @@ def edit():
         g.user.about_me = form.about_me.data
         db.session.add(g.user)
         db.session.commit()
-        flash('Your changes have been saved.')
+        flash(gettext('Your changes have been saved.'))
         return redirect(url_for('edit'))
     else:
         form.nickname.data = g.user.nickname
@@ -85,10 +85,10 @@ def edit():
 def follow(nickname):
     user = User.query.filter_by(nickname = nickname).first()
     if User is None:
-        flash('User %s not found.' % nickname)
+        flash(gettext('User %s not found.' % nickname))
         return redirect(url_for('index'))
     if User == g.user:
-        flash('You can\'t follow yourself!')
+        flash(gettext('You can\'t follow yourself!'))
         return redirect(url_for('user',nickname = nickname))
     u = g.user.follow(user)
     if u is None:
@@ -187,4 +187,4 @@ def internal_error(error):
 
 @babel.localeselector
 def get_local():
-    return request.accept_languages.best_match(LANGUAGES.keys())
+    return "zh" #request.accept_languages.best_match(LANGUAGES.keys())

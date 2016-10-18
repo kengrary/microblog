@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_openid import OpenID
 from flask_mail import Mail
-from flask_babel import Babel
+from flask_babel import Babel, lazy_gettext
 from momentjs import momentjs
 from config import basedir
 
@@ -17,6 +17,7 @@ babel = Babel(app)
 lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
+lm.login_message = lazy_gettext('Please log in to access this page.')
 oid = OpenID(app, os.path.join(basedir, 'tmp'))
 
 app.jinja_env.globals['momentjs'] = momentjs
